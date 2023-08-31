@@ -1,11 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+   <NavBarComp/>
   <router-view/>
 </template>
 
+<script>
+
+import NavBarComp from '@/components/navBarComp.vue'
+export default {
+ components:  {NavBarComp}
+}
+
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
