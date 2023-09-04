@@ -1,3 +1,4 @@
+
 const {sign, verify} = require('jsonwebtoken')
 require("dotenv").config()
 
@@ -6,7 +7,7 @@ function createToken(user) {
         emailAdd: user.emailAdd,
         userPass: user.userPass
     },
-    process.env.SECRET_KEY,
+    process.env.secretKey,
     {
         expiresIn: '1d'
     })

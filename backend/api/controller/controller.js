@@ -22,7 +22,7 @@ routes.post('/register', bodyParser.json(),
     })
 routes.post('/login', bodyParser.json(),
     (req, res)=> {
-        users.register(req, res)
+        users.login(req, res)
     })
     routes.patch('/user/:id', bodyParser.json(),
     (req, res)=>{
