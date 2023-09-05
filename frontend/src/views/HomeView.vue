@@ -16,7 +16,7 @@
     <div class="cont">
       <h1>We don't only find cures, we save lives</h1>
       <div class="btn">
-        <button><a href="">Explore more</a></button>
+        <button><a href="./">Explore more</a></button>
       </div>
     </div>
   </div>

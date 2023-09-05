@@ -3,17 +3,19 @@
     <nav>
       <div class="navbar">
         <div class="container nav-container">
-            <input class="checkbox" type="checkbox" name="" id="" />
+          <div class="logo">
+            <img src="https://i.postimg.cc/02Ys2Qw6/logonew.jpg" alt="companyLogo" width="120" height="50">
+          </div>
+          
+          <input class="checkbox" type="checkbox" name="" id="" />
             <div class="hamburger-lines">
               <span class="line line1"></span>
               <span class="line line2"></span>
               <span class="line line3"></span>
             </div>  
-          <div class="logo">
-            <img src="https://i.postimg.cc/02Ys2Qw6/logonew.jpg" alt="companyLogo" width="120" height="50">
-          </div>
+          
           <div class="menu-items">
-            <router-link to="/home">Home</router-link>
+            <router-link to="/">Home</router-link>
             <router-link to="/about">About</router-link>
             <router-link to="/contact">Contact</router-link>
             <router-link to="/products">Products</router-link>
@@ -44,13 +46,15 @@ body {
   max-width: 1050px;
   width: 90%;
   margin: auto;
- 
+  
 }
 
 .navbar {
   width: 100%;
   height: 67px;
   box-shadow: 0 1px 4px rgb(48, 85, 121);
+  position:fixed;
+  background:#b8dff0
 }
 
 .nav-container {
