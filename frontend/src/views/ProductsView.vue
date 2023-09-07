@@ -1,30 +1,26 @@
 <template>
-  <div v-if="products">
-    <!-- <ProCard :prod = "products" /> -->
-    <ProCard v-for="product in products" :key="product.prodID" :product="product"/>
-   
-    <!-- {{ products }} -->
-
+  <div v-if="Products">
+      <ProCard :products="Products"/>
   </div>
-  <div v-else>Loading</div>
+  <div v-else>
+    loading
+  </div>
 </template>
 
 <script>
-import ProCard from "@/components/ProductsComp.vue";
+import ProCard from '../components/ProductsComp.vue'
 
 export default {
-   
-  components: {
-    ProCard,
-  },
   computed: {
-    products() {
-        console.log(this.$store.state.products);
-      return this.$store.state.products;
-    },
+      Products() {
+          return this.$store.state.products;
+      }
   },
   mounted() {
-    return this.$store.dispatch("getProducts");
+      this.$store.dispatch('getProducts');
   },
-};
+  components: {
+      ProCard
+  }
+}
 </script>

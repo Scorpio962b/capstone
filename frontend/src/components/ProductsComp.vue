@@ -1,18 +1,28 @@
 <template>
-  <div class="container" v-if="products">
+  <div class="container">
     <div class="card" v-for="product in products" :key="product.prodID">
       <div class="card-body">
-      <!-- {{ products }} -->
-        <h2>{{ product.prodName }}</h2>
-        <img :src="product.prodURL" :alt="product.prodURL" />
+        <h2>{{ product.ProdName }}</h2>
+        <img :src="product.prodURL"  />
       </div>
-     <button>view more</button>
+    <router-link class="btn" :to="{name: 'product', params: {id: product.prodID}}">View More</router-link>
     </div>
   </div>
 </template>
+
 <script>
 export default {
-    // name: "products", 
-    props:{product : object}
+  props: {
+    products: Array
+  },
+  products(){
+    return this.$store.state.products
+  },
+  mounted(){
+    this.$store.dispatch("getProducts")
+  }
 }
 </script>
+<style scoped>
+
+</style>

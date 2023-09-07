@@ -1,21 +1,22 @@
-import { createStore } from "vuex";
-import axios from "axios";
-const MyAPI = "https://capstone-api-onzh.onrender.com";
+import { createStore } from 'vuex'
+import axios from 'axios'
+import sweetAlert from 'sweetalert'
+const MyAPI = 'https://capstone-api-onzh.onrender.com/'
+
 export default createStore({
   state: {
     products: null,
     users: null,
     product: null,
     user: null,
+    msg: null
   },
   mutations: {
     setProducts: (state, products) => {
       state.products = products;
-      console.log(products)
     },
     setProduct: (state, product) => {
       state.product = product;
-      console.log(product);
     },
     setUsers: (state, users) => {
       state.users = users;
@@ -23,36 +24,40 @@ export default createStore({
     setUser: (state, user) => {
       state.user = user;
     },
+    setMsg: (state, msg) => {
+      state.msg = msg;
+    },
+
   },
   actions: {
-    // async getProducts(context) {
-    //   try {
-    //     const response = await fetch(`${MyAPI}/products`);
-    //     // const response = await axios.get(`${MyAPI}/products`);
-    //     // const result = await response.data();
-    //     const result = await response.json();
-    //     console.log(result);
-    //     // const { products } =  data;
-    //     if (result) {
-    //       context.commit("setProducts", result);
-    //     } else {
-    //       alert("failed go fetch");
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
     async getProducts(context) {
       try {
-        const response = await fetch(`${MyAPI}/products`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch products (HTTP ${response.status})`);
+        const {data} = await axios.get(`${MyAPI}products`); 
+
+        if (data.results) {
+          context.commit("setProducts", data.results );
+        } else {
+          // alert("error");
+          sweetAlert({
+            title: "Error",
+            text:data.msg,
+            icon:"error",
+            timer: 2000
+          })
         }
-        const result = await response.json();
-        context.commit("setProducts", result);
-      } catch (error) {
-        console.error("Error fetching products:", error);
+      } catch (e) {
+        context.commit("setMsg", "An error occured")
+        console.log(e);
+      }
+    },
+    async getProduct(context, id) {
+      try {
+        const {data} = await axios.get(`${MyAPI}product/` + id); 
+        context.commit("setProduct", data.results[0])
+      } catch (e) {
+        context.commit("setMsg", "An error occured")
+        console.log(e);
       }
     },
   },
-});
+})
