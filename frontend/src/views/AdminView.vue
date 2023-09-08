@@ -37,7 +37,9 @@
         </tr>
       </tfoot>
     </table>
-    <div v-else>Loading</div>
+    <div v-else>Loading
+      <Spinner/>
+    </div>
   </div>
   <div class="userT">
     <h2>users table</h2>
@@ -79,14 +81,19 @@
   </div>
 </template>
 <script>
+import Spinner from '../components/SpinnerComp.vue'
 export default {
   computed: {
       Products() {
           return this.$store.state.products;
+      },
+      users(){
+          return this.$store.state.users;
       }
   },  
   mounted() {
-      this.$store.dispatch('getProducts');
+      this.$store.dispatch('getProducts'),
+      this.$store.dispatch('getUsers');
   },
   // components: {
       
