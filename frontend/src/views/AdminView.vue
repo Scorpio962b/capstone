@@ -1,107 +1,96 @@
 <template>
-  <div>
-    <table>
+  <div class="proT">
+    <h2>products table</h2>
+    <table v-if="Products">
       <thead>
         <tr>
-          <th>id</th>
           <th>name</th>
           <th>quantity</th>
           <th>amount</th>
           <th>Catogary</th>
           <th>image</th>
+          <th>delete/edit</th>
         </tr>
       </thead>
       <tbody>
-        <div>
-          <!-- <tr>
-            {{
-              product.prodName
-            }}
-          </tr> -->
-          <!-- <tr>
-            {{
-              product.quantity
-            }}
-          </tr>
-          <tr>
-            {{
-              product.amount
-            }}
-          </tr>
-          <tr>
-            {{
-              product.Catogary
-            }}
-          </tr>
-          <tr>
-            {{
-              product.prodURL
-            }}
-          </tr> -->
-
-          <button>edit</button>
-          <button>delete</button>
-        </div>
-        <div>
-          <!-- <tr>
-            {{
-              user.firstName
-            }}
-          </tr>
-          <tr>
-            {{
-              user.lastName
-            }}
-          </tr>
-          <tr>
-            {{
-              user.userAge
-            }}
-          </tr>
-          <tr>
-            {{
-              user.gender
-            }}
-          </tr>
-          <tr>
-            {{
-              user.userRole
-            }}
-          </tr>
-          <tr>
-            {{
-              user.emailAdd
-            }}
-          </tr>
-          <tr>
-            {{
-              user.userPass
-            }}
-          </tr> -->
-
-          <button>edit</button>
-          <button>delete</button>
-        </div>
+        <tr v-for="product in Products" :key="product">
+          <td>{{ product.prodName }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.amount }}</td>
+          <td>{{ product.Catogary }}</td>
+          <td>{{ product.imageURL }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <div class="buttons">
+              <ProductUpdate :product="product" :prodID="product.prodID" />
+              <button v-on:click="deleteProduct(product)">delete</button>
+              <button v-on:click="editProduct(prodID)">edit</button>
+            </div>
+          </td>
+        </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <addProduct />
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div v-else>Loading</div>
+  </div>
+  <div class="userT">
+    <h2>users table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>surname</th>
+          <th>age</th>
+          <th>gender</th>
+          <th>email</th>
+          <th>delete/edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.userAge }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.emailAdd }}</td>
+          <td>
+            <div class="buttons">
+              <ProductUpdate :product="product" :prodID="product.prodID" />
+              <button v-on:click="deleteProduct(product)">delete</button>
+              <button v-on:click="editProduct(prodID)">edit</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
-   <script scoped>
+<script>
 export default {
-  //    props: ["user"],
-  //    methods: {
-  //      async deleteUser(id) {
-  //        try {
-  //          await axios.delete(`${MyAPI}users`);
-  //          this.$store.dispatch("getUsers");
-  //          alert("User successfully deleted");
-  //        } catch (err) {
-  //          alert(err);
-  //        }
-  //      },
-  //    },
-};
+  computed: {
+      Products() {
+          return this.$store.state.products;
+      }
+  },  
+  mounted() {
+      this.$store.dispatch('getProducts');
+  },
+  // components: {
+      
+  // }
+}
+
 </script>
-   
-   <style>
-</style>

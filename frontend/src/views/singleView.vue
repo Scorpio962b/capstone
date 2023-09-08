@@ -1,5 +1,5 @@
 <template>
-    <div v-if="product" :key="product.prodID">
+    <div>
         <div>
             <img :src="product.prodUrl" >
             <h2>{{ product.prodName }}</h2>
@@ -14,12 +14,7 @@ export default{
         product(){
             return this.$store.state.product;
         },
-        id(){
-            return this.$route.params.id;
-        },
-        mounted() {
-            this.$store.dispatch("getProduct", this.$route.params.id);
-        },
+       
     }
 }
 
