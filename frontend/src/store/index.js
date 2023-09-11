@@ -9,7 +9,12 @@ export default createStore({
     users: null,
     product: null,
     user: null,
-    msg: null
+    msg: null,
+    orders: null,
+    cart: null,
+    userAuth: null,
+    userLoggedIn: false,
+    setToken:null
   },
   mutations: {
     setProducts: (state, products) => {
@@ -24,17 +29,49 @@ export default createStore({
     setUser: (state, user) => {
       state.user = user;
     },
+    setUserLoggedIn(state, userLoggedIn) {
+      state.userLoggedIn = userLoggedIn;
+    },
+    setToken(state, token) {
+      state.token = token;
+    },
     setMsg: (state, msg) => {
       state.msg = msg;
     },
+    setOrders(state, orders) {
+      state.orders = orders;
+    },
+
+    setCart(state, cart) {
+      state.cart = cart;
+    },
+
 
   },
   actions: {
+    async login(context, payload) {
+      const res = await axios.post(`${MyAPI }/login`, payload);
+      const {result, err} = await res.data;
+      if(result) {
+        context.commit('setUser', result);
+        context.commit('setSpinner', false)
+      }else{
+        context.commit('setMsg', err);
+      }
+    },
+    async register(context, payload) {
+      let res = await axios.post(`${MyAPI }/register`, payload);
+      let {msg, err} = await res.data;
+      if(msg) {
+        context.commit('setUsers', msg)
+        context.commit(`setSpinner`, false);
+      }else{
+        context.commit(`setMsg`, err)
+      }
+    },
     async getProducts(context) {
-
       try {
         const {data} = await axios.get(`${MyAPI}products`); 
-
         if (data.results) {
           context.commit("setProducts", data.results );
         } else {
