@@ -49,6 +49,33 @@ routes.patch('/product/:id', bodyParser.json(),
 routes.delete('/product/:id', (req, res)=>{
     deleteProduct(req, res)
 })
+routes.get("/orders", (req, res) => {
+    orders.getOrders(req, res);
+  });
+  
+  routes.get("/user/:id/carts", verifyAToken, (req, res) => {
+    orders.getCart(req, res);
+  });
+  
+  routes.post("/user/:id/cart", verifyAToken, bodyParser.json(), (req, res) => {
+    orders.addToCart(req, res);
+  });
+  
+  routes.put("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
+    orders.updateCart(req, res);
+  });
+  
+  routes.patch("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
+    orders.updateCart(req, res);
+  });
+  
+  routes.delete("/user/:id/cart", (req, res) => {
+    orders.clearCart(req, res);
+  });
+  
+  routes.delete("/user/:id/cart/:id", (req, res) => {
+    orders.removeFCart(req, res);
+  });
 
 module.exports = {
     express, routes
