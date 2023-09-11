@@ -53,11 +53,11 @@ routes.get("/orders", (req, res) => {
     orders.getOrders(req, res);
   });
   
-  routes.get("/user/:id/carts", verifyAToken, (req, res) => {
+  routes.get("/user/:id/carts", (req, res) => {
     orders.getCart(req, res);
   });
   
-  routes.post("/user/:id/cart", verifyAToken, bodyParser.json(), (req, res) => {
+  routes.post("/user/:id/cart", bodyParser.json(), (req, res) => {
     orders.addToCart(req, res);
   });
   
