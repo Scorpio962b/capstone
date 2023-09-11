@@ -43,7 +43,7 @@
   </div>
   <div class="userT">
     <h2>users table</h2>
-    <table>
+    <table v-if="users">
       <thead>
         <tr>
           <th>name</th>
@@ -63,9 +63,9 @@
           <td>{{ user.emailAdd }}</td>
           <td>
             <div class="buttons">
-              <ProductUpdate :product="product" :prodID="product.prodID" />
-              <button v-on:click="deleteProduct(product)">delete</button>
-              <button v-on:click="editProduct(prodID)">edit</button>
+              <UserUpdate :user="user" :userID="users.userID" />
+              <button v-on:click="deleteProduct(user)">delete</button>
+              <button v-on:click="editProduct(userID)">edit</button>
             </div>
           </td>
         </tr>
@@ -78,6 +78,9 @@
         </tr>
       </tfoot>
     </table>
+    <div v-else>Loading
+      <Spinner/>
+    </div>
   </div>
 </template>
 <script>
@@ -95,9 +98,9 @@ export default {
       this.$store.dispatch('getProducts'),
       this.$store.dispatch('getUsers');
   },
-  // components: {
-      
-  // }
+  components: {
+      Spinner
+  }
 }
 
 </script>

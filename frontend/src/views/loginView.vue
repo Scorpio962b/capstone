@@ -1,15 +1,15 @@
 <template>
     <div class="container">
        <div class="card">
-        <form>
+        <form @submit.prevent="login">
             <h1>login</h1>
             <div class="emailblock">
               <label for="emailAdd">Email</label>
-              <input type="email" class="EMAIL">
+              <input type="email" class="EMAIL" v-model="payload.emailAdd">
             </div>
             <div class="passblock">
               <label for="userPass">password</label>
-              <input type="password" class="PASSWORD">
+              <input type="password" class="PASSWORD" v-model="payload.userPass">
             </div>
             <div class="buttons">
                 <button type="submit" class="submit">login</button>
@@ -23,9 +23,9 @@
     </div>
 </template>
 <script>
-
+import sweetAlert from 'sweetalert'
 export default {
-    props: ['payload'],
+    props: ['initialPayload'],
 
 data() {
     return {
@@ -49,12 +49,21 @@ computed: {
 methods: {
     login() {
         this.$store.dispatch('login', this.payload)
-        this.$router.push("/profile");
+        .then(() => {
+            sweetAlert({
+            title: "success",
+            text:"you are now logged in",
+            icon:"success",
+            confirmButtontext: "ok",
+            timer:1000
+          })
+        })
+        this.$router.push("/");
     }
 },
 
 mounted() {
-  console.log(cookies.get('setToken'));
+//   console.log(cookies.get('setToken'));
 }
 };
 

@@ -21,7 +21,8 @@ export default {
       this.$store.dispatch('getProducts');
   },
   components: {
-      ProCard
+      ProCard,
+      Spinner
   }
 }
 </script>

@@ -50,8 +50,9 @@ export default createStore({
   },
   actions: {
     async login(context, payload) {
-      const res = await axios.post(`${MyAPI }/login`, payload);
+      const res = await axios.post(`${MyAPI}login`, payload);
       const {result, err} = await res.data;
+      console.log(result)
       if(result) {
         context.commit('setUser', result);
         context.commit('setSpinner', false)
@@ -60,7 +61,7 @@ export default createStore({
       }
     },
     async register(context, payload) {
-      let res = await axios.post(`${MyAPI }/register`, payload);
+      let res = await axios.post(`${MyAPI}register`, payload);
       let {msg, err} = await res.data;
       if(msg) {
         context.commit('setUsers', msg)
@@ -90,8 +91,13 @@ export default createStore({
     },
     async getProductById(context, id) {
       try {
-        const {data} = await axios.get(`${MyAPI}product/${prodID}`); 
-        context.commit("setProduct", data.results[0])
+        const {result} = (await axios.get(`${MyAPI}product/${id}`)).data; 
+        if(result){
+
+          context.commit("setProduct", result)
+        }else{
+          console.log("No data");
+        }
       } catch (e) {
         context.commit("setMsg", "An error occured")
         console.log(e);
@@ -140,8 +146,8 @@ export default createStore({
       const res = await axios.post(`${MyAPI}/products`, payload);
       const {result, err} = await res.data;
       if(result){
-        context.commit('setMessage', result)
-      } else context.commit('setMessage', err)
+        context.commit('setMsg', result)
+      } else context.commit('setMsg', err)
     },
     async updateProduct(context,payload){
       const res = await axios.patch(`${MyAPI}/products/${payload.id}`, payload);
@@ -152,7 +158,7 @@ export default createStore({
         context.commit('setProducts', results);
       } else {
         // console.log(err)
-        context.commit('setMessage', err)
+        context.commit('setMsg', err)
       }
     },
     async deleteProduct(context, id){
@@ -161,7 +167,7 @@ export default createStore({
       if(results, msg){
         context.dispatch('getProducts', results, msg);
       } else {
-        context.commit('setMessage', err);
+        context.commit('setMsg', err);
       }
     },
     async deleteUser(context, userID){
