@@ -68,7 +68,7 @@ class orders {
     });
   }
 
-  removeFCart(req, res) {
+  deleteCart(req, res) {
     const query = `DELETE FROM orders WHERE prodID = '${req.params.id}';`;
 
     db.query(query, (err) => {
