@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import { useCookies } from "vue3-cookies";
+const { cookies } = useCookies();
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    beforeEnter: () => {
+      if(!cookies.get("patient")){
+        router.push({name:"login"})
+      }
+    }
   },
   {
     path: '/about',
@@ -21,8 +27,9 @@ const routes = [
     component: () => import('../views/ProductsView.vue')
   },
   {
-    path: '/product/:id',
+    path: '/product/:prodID',
     name: 'product',
+    props: true,
     component: () => import('../views/singleView.vue')
   },
   {

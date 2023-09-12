@@ -2,6 +2,9 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import sweetAlert from 'sweetalert'
 const MyAPI = 'https://capstone-api-onzh.onrender.com/'
+import { useCookies } from "vue3-cookies";
+const { cookies } = useCookies();
+import authuser from '@/services/authuser';
 
 export default createStore({
   state: {
@@ -22,6 +25,7 @@ export default createStore({
     },
     setProduct: (state, product) => {
       state.product = product;
+      console.log('Product data received:',product);
     },
     setUsers: (state, users) => {
       state.users = users;
@@ -50,19 +54,37 @@ export default createStore({
   },
   actions: {
     async login(context, payload) {
-      const res = await axios.post(`${MyAPI}login`, payload);
-      const {result, err} = await res.data;
-      console.log(result)
-      if(result) {
-        context.commit('setUser', result);
-        context.commit('setSpinner', false)
-      }else{
-        context.commit('setMsg', err);
+      try {
+        const { msg, token, result } = (
+          await axios.post(`${MyAPI}login`, payload)
+        ).data;
+        if (result) {
+          context.commit("setUser", { result, msg });
+          cookies.set("patient", { msg, token, result });
+          authuser.applyToken(token);
+          sweet({
+            title: msg,
+            text: `Welcome back ${result?.firstName} ${result?.lastName}`,
+            icon: "success",
+            timer: 4000,
+          });
+          router.push({ name: "home" });
+        } else {
+          sweet({
+            title: "Error",
+            text: msg,
+            icon: "error",
+            timer: 4000,
+          });
+        }
+      } catch (e) {
+        context.commit("setMsg", "An error has occured");
       }
     },
     async register(context, payload) {
       let res = await axios.post(`${MyAPI}register`, payload);
-      let {msg, err} = await res.data;
+      console.log('Result:', res);
+      let {result, msg, err} = await res.data;
       if(msg) {
         context.commit('setUsers', msg)
         context.commit(`setSpinner`, false);
@@ -89,17 +111,18 @@ export default createStore({
         console.log(e);
       }
     },
-    async getProductById(context, id) {
+    async getProductById(context, prodID) {
       try {
-        const {result} = (await axios.get(`${MyAPI}product/${id}`)).data; 
+        const {result} = (await axios.get(`${MyAPI}product/${prodID}`)).data;  
+        console.log('Product data received from API:', result);
         if(result){
-
-          context.commit("setProduct", result)
+          context.commit("setProduct", result);
+          context.dispatch("getProduct")
         }else{
           console.log("No data");
         }
       } catch (e) {
-        context.commit("setMsg", "An error occured")
+        context.commit("setMsg", "An error occured");
         console.log(e);
       }
     },

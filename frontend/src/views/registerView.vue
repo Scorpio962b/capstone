@@ -34,7 +34,7 @@
 </template>
 <script>
 export default {
-  props: ["user"],
+  props: [],
 
   data() {
     return {
