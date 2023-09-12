@@ -8,10 +8,17 @@
     <router-link to="/cart">Cart</router-link> |
     <router-link to="/login">login</router-link> |
     <router-link to="/register">register</router-link> |
+    <router-link to="/login" @click="logout">Logout</router-link> |
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods:{
+    logout(){
+      this.$store.dispatch("logout")
+    }
+  }
+};
 </script>
 <style>
 </style>

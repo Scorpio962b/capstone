@@ -43,7 +43,7 @@
   </div>
   <div class="userT">
     <h2>users table</h2>
-    <table v-if="users">
+    <table v-if="Users">
       <thead>
         <tr>
           <th>name</th>
@@ -55,7 +55,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user">
+        <tr v-for="user in Users" :key="user">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.userAge }}</td>
@@ -63,7 +63,7 @@
           <td>{{ user.emailAdd }}</td>
           <td>
             <div class="buttons">
-              <UserUpdate :user="user" :userID="users.userID" />
+              <UserUpdate :user="user" :userID="Users.userID" />
               <button v-on:click="deleteProduct(user)">delete</button>
               <button v-on:click="editProduct(userID)">edit</button>
             </div>
@@ -90,7 +90,7 @@ export default {
       Products() {
           return this.$store.state.products;
       },
-      users(){
+      Users(){
           return this.$store.state.users;
       }
   },  

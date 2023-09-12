@@ -5,12 +5,13 @@ const MyAPI = 'https://capstone-api-onzh.onrender.com/'
 import { useCookies } from "vue3-cookies";
 const { cookies } = useCookies();
 import authuser from '@/services/authuser';
+import router from '@/router';
 
 export default createStore({
   state: {
     products: null,
-    users: null,
     product: null,
+    users: null,
     user: null,
     msg: null,
     orders: null,
@@ -25,7 +26,6 @@ export default createStore({
     },
     setProduct: (state, product) => {
       state.product = product;
-      console.log('Product data received:',product);
     },
     setUsers: (state, users) => {
       state.users = users;
@@ -81,6 +81,11 @@ export default createStore({
         context.commit("setMsg", "An error has occured");
       }
     },
+    async logout(context) {
+      context.commit("setUser");
+      cookies.remove("patient");
+      location.reload()
+    },
     async register(context, payload) {
       let res = await axios.post(`${MyAPI}register`, payload);
       console.log('Result:', res);
@@ -117,7 +122,6 @@ export default createStore({
         console.log('Product data received from API:', result);
         if(result){
           context.commit("setProduct", result);
-          context.dispatch("getProduct")
         }else{
           console.log("No data");
         }
@@ -126,7 +130,6 @@ export default createStore({
         console.log(e);
       }
     },
-  },
     async getUsers(context) {
       try {
         const {data} = await axios.get(`${MyAPI}users`); 
@@ -201,5 +204,6 @@ export default createStore({
       } else {
         context.commit('setMsg', err);
       }
-    },
+    }
+  },
 })
