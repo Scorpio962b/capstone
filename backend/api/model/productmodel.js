@@ -32,7 +32,7 @@ const insertProduct = (data, result) => {
         });   
     }
 const updateProductById = (data, id, result) => {
-        db.query("UPDATE Products SET prodName = ?, amount= ? WHERE prodID= ?", [data.prodName, data.amount, id], (err, results) => {             
+        db.query("UPDATE Products SET prodName = ?, amount= ?,Catogary=? ,prodURL=?, description = ? WHERE prodID= ?", [data.prodName, data.amount,data.Catogary,data.prodURL,data.description, id], (err, results) => {             
             if(err) {
                 console.log(err);
                 result(err, null);
