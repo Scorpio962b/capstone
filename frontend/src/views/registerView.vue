@@ -46,6 +46,7 @@ export default {
         userRole:"user",
         emailAdd: "",
         userPass: "",
+        userURL:"https://i.postimg.cc/JzfjhrXZ/profile-image.jpg",
       }, 
     };
   },

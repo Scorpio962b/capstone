@@ -16,7 +16,7 @@
     <div class="cont">
       <h1>We don't only find cures, we save lives</h1>
       <div class="btn">
-        <button><a href="./">Explore more</a></button>
+        <button><a href="./about">Explore more</a></button>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

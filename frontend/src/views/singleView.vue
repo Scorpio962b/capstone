@@ -4,6 +4,7 @@
             <img :src="product.prodURL" :alt="product.prodName" >
             <h2>{{ product.prodName }}</h2>
             <p>{{ product.Catogary }}</p>
+            <p>{{ product.description }}</p>
             <button>addtocart</button>
         </div>
         <div class="text-white loading" v-else>
@@ -19,7 +20,6 @@ export default{
         product(){
             return this.$store.state.product;
         },
-
     },
     created(){
         this.$store.dispatch("getProductById",this.$route.params.prodID)

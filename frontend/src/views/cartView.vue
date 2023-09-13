@@ -1,3 +1,9 @@
 <template>
+   
+  </template>
+  
+  <script>
+  export default {
     
-</template>
+  }
+  </script>

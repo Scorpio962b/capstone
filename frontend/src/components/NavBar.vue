@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/profile" ><font-awesome-icon :icon="['fas', 'user']" /></router-link> |
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <!-- <router-link to="/contact">Contact</router-link> -->
@@ -20,5 +21,6 @@ export default {
   }
 };
 </script>
-<style>
+<style  scoped>
+
 </style>

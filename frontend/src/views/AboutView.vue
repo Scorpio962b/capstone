@@ -1,8 +1,8 @@
 <template>
-    <header>
-        <h1>About Health Run</h1>
-    </header>
     <div class="container">
+        <header>
+            <h1>About Health Run</h1>
+        </header>
         <h2>Our Mission</h2>
         <p>Empowering Health: Our mission is to empower individuals to take control of their health and wellness through safe and effective pharmaceuticals, innovative healthcare solutions, and valuable information.</p>
 
@@ -27,3 +27,14 @@
         <p><strong>Website:</strong> <a href="[Your Company Website]">[Your Company Website]</a></p>
     </div>
 </template>
+<script>
+export default {
+}
+</script>
+<style scoped>
+.container{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+}
+</style>

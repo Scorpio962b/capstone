@@ -18,7 +18,7 @@
           <td>{{ product.quantity }}</td>
           <td>{{ product.amount }}</td>
           <td>{{ product.Catogary }}</td>
-          <td>{{ product.imageURL }}</td>
+          <td><img class="imag" :src="product.prodURL" alt="product.prodName"></td>
           <td>{{ product.quantity }}</td>
           <td>
             <div class="buttons">
@@ -62,7 +62,7 @@
           <td>{{ user.userAge }}</td>
           <td>{{ user.gender }}</td>
           <td>{{ user.emailAdd }}</td>
-          <td>{{ user.userURL}}</td>
+          <td><img :src="user.userUrl" class= "use" alt="user.firstName" ></td>
           <td>
             <div class="buttons">
               <UserUpdate :user="user" :userID="Users.userID" />
@@ -106,3 +106,13 @@ export default {
 }
 
 </script>
+<style scoped>
+.imag{
+  width: 100%;
+  height:200px!important;
+}
+.use{
+  width: 100%;
+  height:100px!important;
+}
+</style>
