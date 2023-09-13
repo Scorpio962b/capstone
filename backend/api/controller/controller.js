@@ -7,7 +7,7 @@ const express = require ('express');
 const  routes = express.Router();
 const bodyParser = require('body-parser')
 //import model objects 
-const {users} = require('../model');
+const {users , orders} = require('../model');
 const { showProducts,showProductById,createProduct,updateProduct,deleteProduct} = require('./product.js');
 // User's router 
 routes.get('/users', (req, res)=>{
@@ -59,10 +59,6 @@ routes.get("/orders", (req, res) => {
   
   routes.post("/user/:id/cart", bodyParser.json(), (req, res) => {
     orders.addToCart(req, res);
-  });
-  
-  routes.put("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
-    orders.updateCart(req, res);
   });
   
   routes.patch("/user/:id/cart/:id", bodyParser.json(), (req, res) => {

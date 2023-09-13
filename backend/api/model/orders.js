@@ -15,9 +15,11 @@ class orders {
   }
 
   getCart(req, res) {
-    const query = `SELECT orderID, prodName, 
-    quantity,Amount, firstName, 
-      FROM users INNER JOIN orders ON Users.orderID = orders.firstName INNER JOIN Products ON orders.prodName = `;
+    const query = `SELECT orderID, Products.prodName, 
+    orders.quantity, orders.Amount, users.firstName
+    FROM users
+    INNER JOIN orders ON orders.orderID = orders.firstName
+    INNER JOIN Products ON orders.prodName = Products.prodID`;
 
     db.query(query, (err, results) => {
       if (err) throw err;
