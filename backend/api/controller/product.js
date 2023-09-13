@@ -1,5 +1,5 @@
 const {getProducts,getProductById,insertProduct,updateProductById,deleteProductById} = require('../model/productmodel.js');
-const showProducts = (req, res) => {git
+const showProducts = (req, res) => {
     getProducts((err, results) => {
         if (err){
             res.send(err);
