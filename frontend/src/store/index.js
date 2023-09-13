@@ -62,19 +62,19 @@ export default createStore({
           context.commit("setUser", { result, msg });
           cookies.set("patient", { msg, token, result });
           authuser.applyToken(token);
-          sweet({
+          sweetAlert({
             title: msg,
             text: `Welcome back ${result?.firstName} ${result?.lastName}`,
             icon: "success",
-            timer: 4000,
+            timer: 1000,
           });
           router.push({ name: "home" });
         } else {
-          sweet({
+          sweetAlert({
             title: "Error",
             text: msg,
             icon: "error",
-            timer: 4000,
+            timer: 1000,
           });
         }
       } catch (e) {
@@ -101,6 +101,7 @@ export default createStore({
       try {
         const {data} = await axios.get(`${MyAPI}products`); 
         if (data.results) {
+          console.log(data)
           context.commit("setProducts", data.results );
         } else {
           // alert("error");

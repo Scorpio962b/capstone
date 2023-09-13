@@ -12,9 +12,11 @@
 import ProCard from '../components/ProductsComp.vue'
 import Spinner from '../components/SpinnerComp.vue'
 export default {
+    
   computed: {
       Products() {
           return this.$store.state.products;
+          console.log(Products)
       }
   },
   mounted() {

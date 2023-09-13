@@ -51,6 +51,7 @@
           <th>age</th>
           <th>gender</th>
           <th>email</th>
+          <th>image</th>
           <th>delete/edit</th>
         </tr>
       </thead>
@@ -61,6 +62,7 @@
           <td>{{ user.userAge }}</td>
           <td>{{ user.gender }}</td>
           <td>{{ user.emailAdd }}</td>
+          <td>{{ user.userURL}}</td>
           <td>
             <div class="buttons">
               <UserUpdate :user="user" :userID="Users.userID" />

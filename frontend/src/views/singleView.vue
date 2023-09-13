@@ -7,7 +7,6 @@
             <button>addtocart</button>
         </div>
         <div class="text-white loading" v-else>
-            loading 
             <Spinner/>
         </div>
     </div>
