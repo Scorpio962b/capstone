@@ -1,47 +1,49 @@
 const db = require("../config/index.js");
 
-class orders {
+class Orders {
   getOrders(req, res) {
-    
-    const query = `SELECT orderID, prodName,firstName, Amount, quantity FROM orders;`;
+    const query = `SELECT orderID, prodName, firstName, Amount FROM orders;`; 
 
     db.query(query, (err, results) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        results,
-      });
+      if (err) {
+        console.error(err); 
+        res.json({
+                  status: res.statusCode,
+                  results,
+                });
+        return;
+      }
     });
   }
 
   getCart(req, res) {
-    const query = `SELECT orderID, Products.prodName, 
-    orders.quantity, orders.Amount, users.firstName
+    const query = `SELECT orders.orderID, Products.prodName, orders.Amount, users.firstName
     FROM users
-    INNER JOIN orders ON orders.orderID = orders.firstName
-    INNER JOIN Products ON orders.prodName = Products.prodID`;
+    INNER JOIN orders ON users.userID = orders.userID 
+    INNER JOIN Products ON orders.prodID = Products.prodID`; 
 
     db.query(query, (err, results) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        results,
-      });
+      if (err) {
+        console.error(err);
+        res.json({
+          status: res.statusCode,
+          results,
+        });
+      }
     });
   }
 
   addToCart(req, res) {
     const query = `INSERT INTO orders SET ?`;
 
-    db.query(query, [req.body], (err) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        Msg: "Product added!",
-      });
+    db.query(query, req.body, (err) => { 
+      if (err) {
+        console.error(err);
+        res.json({
+          status: res.statusCode,
+          results,
+        });
+      }
     });
   }
 
@@ -49,12 +51,13 @@ class orders {
     const query = `UPDATE orders SET ? WHERE orderID = ?;`;
 
     db.query(query, [req.body, req.params.id], (err) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        Msg: "order is updated!",
-      });
+      if (err) {
+        console.error(err);
+        res.json({
+          status: res.statusCode,
+          results,
+        });
+      }
     });
   }
 
@@ -62,27 +65,30 @@ class orders {
     const query = `DELETE FROM orders WHERE userID = ${req.params.id};`;
 
     db.query(query, (err) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        Msg: "Cart cleared!",
-      });
+      if (err) {
+        console.error(err);
+        res.json({
+          status: res.statusCode,
+          results,
+        });
+      }
     });
   }
 
   deleteCart(req, res) {
-    const query = `DELETE FROM orders WHERE prodID = '${req.params.id}';`;
+    const query = `DELETE FROM orders WHERE orderID = '${req.params.id}';`; 
 
     db.query(query, (err) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        Msg: "Item deleted cart!",
-      });
+      if (err) {
+        console.error(err);
+        res.json({
+          status: res.statusCode,
+          results,
+        });
+        return;
+      }
     });
   }
 }
 
-module.exports = orders;
+module.exports = Orders;
