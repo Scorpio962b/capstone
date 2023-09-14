@@ -39,7 +39,7 @@ class orders {
 
       res.json({
         status: res.statusCode,
-        Msg: "Product added to cart!",
+        Msg: "Product added!",
       });
     });
   }
@@ -52,7 +52,7 @@ class orders {
 
       res.json({
         status: res.statusCode,
-        Msg: "order updated!",
+        Msg: "order is updated!",
       });
     });
   }
@@ -65,7 +65,7 @@ class orders {
 
       res.json({
         status: res.statusCode,
-        Msg: "Cart is cleared!",
+        Msg: "Cart cleared!",
       });
     });
   }
@@ -78,7 +78,7 @@ class orders {
 
       res.json({
         status: res.statusCode,
-        Msg: "Item is removed from cart!",
+        Msg: "Item deleted cart!",
       });
     });
   }
