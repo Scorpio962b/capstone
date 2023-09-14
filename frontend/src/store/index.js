@@ -131,6 +131,34 @@ export default createStore({
         console.log(e);
       }
     },
+    async addProduct(context, payload){
+      const res = await axios.post(`${MyAPI}/products`, payload);
+      const {result, err} = await res.data;
+      if(result){
+        context.commit('setMsg', result)
+      } else context.commit('setMsg', err)
+    },
+    async updateProduct(context,payload){
+      const res = await axios.patch(`${MyAPI}/products/${payload.id}`, payload);
+      console.log(await payload.id)
+      const {results,err} = await res.data;
+      if(results){
+        console.log(results)
+        context.commit('setProducts', results);
+      } else {
+        // console.log(err)
+        context.commit('setMsg', err)
+      }
+    },
+    async deleteProduct(context, id){
+      const res = await axios.delete(`${MyAPI}/products/${id}`);
+      const {results, err, msg} = res.data;
+      if(results, msg){
+        context.dispatch('getProducts', results, msg);
+      } else {
+        context.commit('setMsg', err);
+      }
+    },
     async getUsers(context) {
       try {
         const {data} = await axios.get(`${MyAPI}users`); 
@@ -160,6 +188,18 @@ export default createStore({
         console.log(e);
       }
     },
+    addUser(context,payload) {
+      axios.post("${MyAPI}/register", payload)
+        .then(response => {
+          console.log("User added:", response.data);
+          context.dispatch("getUsers")
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("An error occurred .");
+        });
+        alert("New user added.")
+    },
     async updateUser(context, payload){
       const res = await axios.patch(`${MyAPI}/users/${payload.userID}`,payload);
       const {result, err}= await res.data;
@@ -169,34 +209,7 @@ export default createStore({
         context.commit(`setMsg`, err)
       }
     },
-    async addProduct(context, payload){
-      const res = await axios.post(`${MyAPI}/products`, payload);
-      const {result, err} = await res.data;
-      if(result){
-        context.commit('setMsg', result)
-      } else context.commit('setMsg', err)
-    },
-    async updateProduct(context,payload){
-      const res = await axios.patch(`${MyAPI}/products/${payload.id}`, payload);
-      console.log(await payload.id)
-      const {results,err} = await res.data;
-      if(results){
-        console.log(results)
-        context.commit('setProducts', results);
-      } else {
-        // console.log(err)
-        context.commit('setMsg', err)
-      }
-    },
-    async deleteProduct(context, id){
-      const res = await axios.delete(`${MyAPI}/products/${id}`);
-      const {results, err, msg} = res.data;
-      if(results, msg){
-        context.dispatch('getProducts', results, msg);
-      } else {
-        context.commit('setMsg', err);
-      }
-    },
+  
     async deleteUser(context, userID){
       const res = await axios.delete(`${MyAPI}/users/${userID}`);
       const {results, err} = res.data;

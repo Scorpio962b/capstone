@@ -9,7 +9,8 @@
           <th>amount</th>
           <th>Catogary</th>
           <th>image</th>
-          <th>delete/edit</th>
+          <th>delete</th>
+          <th>edit</th>
         </tr>
       </thead>
       <tbody>
@@ -23,8 +24,8 @@
           <td>
             <div class="buttons">
               <ProductUpdate :product="product" :prodID="product.prodID" />
-              <button v-on:click="deleteProduct(product)">delete</button>
-              <button v-on:click="editProduct(prodID)">edit</button>
+              <button @click="deleteProduct(product)">delete</button>
+              <button @click="updateProduct(prodID)">edit</button>
             </div>
           </td>
         </tr>
@@ -49,6 +50,7 @@
           <th>name</th>
           <th>surname</th>
           <th>age</th>
+          <th>userRole</th>
           <th>gender</th>
           <th>email</th>
           <th>image</th>
@@ -60,14 +62,15 @@
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.userAge }}</td>
+          <td>{{ user.userRole}}</td>
           <td>{{ user.gender }}</td>
           <td>{{ user.emailAdd }}</td>
           <td><img :src="user.userUrl" class= "use" alt="user.firstName" ></td>
           <td>
             <div class="buttons">
               <UserUpdate :user="user" :userID="Users.userID" />
-              <button v-on:click="deleteProduct(user)">delete</button>
-              <button v-on:click="editProduct(userID)">edit</button>
+              <button @click="deleteUser(user.userID)">delete</button>
+              <button @click="updateUser(users.userID)">edit</button>
             </div>
           </td>
         </tr>
@@ -87,6 +90,7 @@
 </template>
 <script>
 import Spinner from '../components/SpinnerComp.vue'
+import store from '@/store';
 export default {
   computed: {
       Products() {
@@ -100,9 +104,18 @@ export default {
       this.$store.dispatch('getProducts'),
       this.$store.dispatch('getUsers');
   },
+  methods: {
+    updateUser(id) {
+      this.$store.dispatch("updateUser",id);
+    },
+    deleteUser(id) {
+      this.$store.dispatch("deleteUser", id);
+    },
   components: {
-      Spinner
+      Spinner,
+      store
   }
+}
 }
 
 </script>

@@ -16,6 +16,7 @@
 <script>
 import Spinner from '../components/SpinnerComp.vue'
 export default{
+    props: ["user"],
     computed:{
         User(){
           return this.$store.state.user;
