@@ -4,6 +4,7 @@
       <div class="card-body">
         <img :src="product.prodURL" style="width:200px" />
         <h2>{{ product.prodName }}</h2>
+        <p>R{{ product.amount}}</p>
       </div>
      <router-link class="btn" :to="{name: 'product', params: {prodID: product.prodID}}">View More</router-link>
     </div>

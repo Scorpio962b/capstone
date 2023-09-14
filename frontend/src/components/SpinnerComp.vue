@@ -2,12 +2,12 @@
   <svg
     width="45"
     height="45"
-    stroke="#00bf63"
-    viewBox="0 0 45 45"
+    stroke="#394871"
+    viewBox="0 0 50 50"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="spinner_V8m1">
-      <circle cx="15" cy="15" r="10.5" fill="none" stroke-width="6"></circle>
+      <circle cx="15" cy="15" r="15" fill="none" stroke-width="6"></circle>
     </g>
   </svg>
 </template>

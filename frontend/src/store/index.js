@@ -45,7 +45,6 @@ export default createStore({
     setOrders(state, orders) {
       state.orders = orders;
     },
-
     setCart(state, cart) {
       state.cart = cart;
     },
@@ -66,7 +65,7 @@ export default createStore({
             title: msg,
             text: `Welcome back ${result?.firstName} ${result?.lastName}`,
             icon: "success",
-            timer: 1000,
+            timer: 2000,
           });
           router.push({ name: "home" });
         } else {
@@ -74,7 +73,7 @@ export default createStore({
             title: "Error",
             text: msg,
             icon: "error",
-            timer: 1000,
+            timer: 2000,
           });
         }
       } catch (e) {

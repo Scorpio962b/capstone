@@ -5,7 +5,6 @@
       <thead>
         <tr>
           <th>name</th>
-          <th>quantity</th>
           <th>amount</th>
           <th>Catogary</th>
           <th>image</th>
@@ -16,8 +15,7 @@
       <tbody>
         <tr v-for="product in Products" :key="product">
           <td>{{ product.prodName }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>{{ product.amount }}</td>
+          <td>R{{ product.amount }}</td>
           <td>{{ product.Catogary }}</td>
           <td><img class="imag" :src="product.prodURL" alt="product.prodName"></td>
           <td>{{ product.quantity }}</td>
@@ -25,6 +23,11 @@
             <div class="buttons">
               <ProductUpdate :product="product" :prodID="product.prodID" />
               <button @click="deleteProduct(product)">delete</button>
+            </div>
+          </td>
+          <td>
+            <div class="buttons">
+              <ProductUpdate :product="product" :prodID="product.prodID" />
               <button @click="updateProduct(prodID)">edit</button>
             </div>
           </td>
@@ -54,7 +57,8 @@
           <th>gender</th>
           <th>email</th>
           <th>image</th>
-          <th>delete/edit</th>
+          <th>delete</th>
+          <th>edit</th>
         </tr>
       </thead>
       <tbody>
@@ -70,6 +74,11 @@
             <div class="buttons">
               <UserUpdate :user="user" :userID="Users.userID" />
               <button @click="deleteUser(user.userID)">delete</button>
+            </div>
+          </td>
+          <td>
+            <div class="buttons">
+              <UserUpdate :user="user" :userID="Users.userID" />
               <button @click="updateUser(users.userID)">edit</button>
             </div>
           </td>
@@ -82,7 +91,7 @@
           <td></td>
         </tr>
       </tfoot>
-    </table>
+    </table> 
     <div v-else>Loading
       <Spinner/>
     </div>
@@ -105,11 +114,11 @@ export default {
       this.$store.dispatch('getUsers');
   },
   methods: {
-    updateUser(id) {
-      this.$store.dispatch("updateUser",id);
+    updateUser(userID) {
+      this.$store.dispatch("updateUser",userID);
     },
-    deleteUser(id) {
-      this.$store.dispatch("deleteUser", id);
+    deleteUser(userID) {
+      this.$store.dispatch("deleteUser", userID);
     },
   components: {
       Spinner,

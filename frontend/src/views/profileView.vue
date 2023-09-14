@@ -1,34 +1,43 @@
 <template>
-    <div>
-        <div v-if="User">
-            <div v-for="user in users">
-            <img :src="User.userUrl" :alt="User.firstName" >
-            <h2>{{ User.firstName }}</h2>
-            <p>{{ User.lastName}}</p>
-            <p>{{ User.emailAdd }}</p>
+    
+</template>
+<!-- <template>
+  <div>
+    <div class="container">
+      <div class="card">
+        <div :user="user" :key="user.userID">
+          <img :src="user.userUrl" :alt="user.firstName" />
         </div>
-    </div>
-        <div class="text-white loading" v-else>
-            <Spinner/>
+        <div>
+          <h1>Welcome back, {{ user.firstName }}!</h1>
+          <h2>User Information</h2>
+          <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
+          <p>Age: {{ user.userAge }}</p>
+          <p>Gender: {{ user.gender }}</p>
+          <p>Role: {{ user.userRole }}</p>
+          <p>Email Address: {{ user.emailAdd }}</p>
+          <p>Password: {{ user.userPass }}</p>
+          <button @click.prevent="logout()">Log Out</button>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
-import Spinner from '../components/SpinnerComp.vue'
-export default{
-    props: ["user"],
-    computed:{
-        User(){
-          return this.$store.state.user;
-          
+import router from "@/router";
+import { useCookies } from "vue3-cookies";
+const { cookies } = useCookies();
+export default {
+    computed: {
+        user() {
+            return this.$store.state.user || cookies.get("patient");
+        },
+    },
+    methods: {
+        logout() {
+            cookies.remove("patient")
+            router.push({ name: "login" });
         }
-    },
-    created(){
-        this.$store.dispatch("getUserById",this.$route.params.userID)
-    },
-    components: {
-      Spinner
-  }
-}
-
-</script>
+    }
+};
+</script> -->

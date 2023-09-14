@@ -55,7 +55,7 @@ methods: {
             text:"you are now logged in",
             icon:"success",
             confirmButtontext: "ok",
-            timer:1000
+            timer:2000
           })
         })
         this.$router.push("/");
