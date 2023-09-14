@@ -1,5 +1,5 @@
 const Users = require('./users')
-const Orders = require('./orders')
+const cart = require('./cart')
 module.exports = {
     users: new Users(),
-    orders: new Orders }
+    cart: new cart }

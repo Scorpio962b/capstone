@@ -1,10 +1,10 @@
 const db = require("../config/index.js");
 
-class Orders {
-  getOrders(req, res) {
-    const query = `SELECT orderID, prodName, firstName, Amount FROM orders`; 
+class cart {
+  getCart(req, res) {
+    const query = `SELECT orderID,userID,firstName, prodName, prodID, Amount FROM cart`; 
 
-    db.query(query, (err, results) => {
+    db.query(query, (err, res) => {
       if (err) {
         console.error(err); 
         res.json({
@@ -16,39 +16,39 @@ class Orders {
     });
   }
 
-  getCart(req, res) {
-    const query = `SELECT orders.orderID, Products.prodName, orders.Amount, users.firstName
+  getCarts(req, res) {
+    const query = `SELECT cart.orderID,users.userID, users.firstName,Products.prodName,Products.prodID, orders.Amount, 
     FROM users
-    INNER JOIN orders ON users.userID = users.userID 
+    INNER JOIN  ON users.userID = users.userID 
     INNER JOIN Products ON Products.prodID = Products.prodID`; 
 
-    db.query(query, (err, results) => {
+    db.query(query, (err, res) => {
       if (err) {
         console.error(err);
         res.json({
           status: res.statusCode,
-          results,
+          res,
         });
       }
     });
   }
 
   addToCart(req, res) {
-    const query = `INSERT INTO orders SET ?`;
+    const query = `INSERT INTO cart SET ?`;
 
     db.query(query, req.body, (err) => { 
       if (err) {
         console.error(err);
         res.json({
           status: res.statusCode,
-          results,
+          res,
         });
       }
     });
   }
 
   updateCart(req, res) {
-    const query = `UPDATE orders SET ? WHERE orderID = ?
+    const query = `UPDATE cart SET ? WHERE orderID = ?
     `;
 
     db.query(query, [req.body, req.params.id], (err) => {
@@ -56,40 +56,39 @@ class Orders {
         console.error(err);
         res.json({
           status: res.statusCode,
-          results,
+          res,
         });
       }
     });
   }
 
   clearCart(req, res) {
-    const query = `DELETE FROM orders WHERE userID = ${req.params.id}`;
+    const query = `DELETE FROM cart WHERE userID = ${req.params.id}`;
 
     db.query(query, (err) => {
       if (err) {
         console.error(err);
         res.json({
           status: res.statusCode,
-          results,
+          res,
         });
       }
     });
   }
 
   deleteCart(req, res) {
-    const query = `DELETE FROM orders WHERE orderID = '${req.params.id}'`; 
+    const query = `DELETE FROM cart WHERE orderID = '${req.params.id}'`; 
 
     db.query(query, (err) => {
       if (err) {
         console.error(err);
         res.json({
           status: res.statusCode,
-          results,
+          res,
         });
-        return;
       }
     });
   }
 }
 
-module.exports = Orders;
+module.exports = cart;

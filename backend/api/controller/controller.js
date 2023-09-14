@@ -7,7 +7,7 @@ const express = require ('express');
 const  routes = express.Router();
 const bodyParser = require('body-parser')
 //import model objects 
-const {users , orders} = require('../model');
+const {users , cart} = require('../model');
 const { showProducts,showProductById,createProduct,updateProduct,deleteProduct} = require('./product.js');
 // User's router 
 routes.get('/users', (req, res)=>{
@@ -50,28 +50,28 @@ routes.delete('/product/:id', (req, res)=>{
     deleteProduct(req, res)
 })
 
-routes.get("/orders", (req, res) => {
-    orders.getOrders(req, res);
+routes.get("/cart", (req, res) => {
+    cart.getCart(req, res);
   });
   
   routes.get("/user/:id/carts", (req, res) => {
-    orders.getCart(req, res);
+    cart.getCart(req, res);
   });
   
   routes.post("/user/:id/cart", bodyParser.json(), (req, res) => {
-    orders.addToCart(req, res);
+    cart.addToCart(req, res);
   });
   
   routes.patch("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
-    orders.updateCart(req, res);
+    cart.updateCart(req, res);
   });
   
   routes.delete("/user/:id/cart", (req, res) => {
-    orders.clearCart(req, res);
+    cart.clearCart(req, res);
   });
   
   routes.delete("/user/:id/cart/:id", (req, res) => {
-    orders.removeFCart(req, res);
+    cart.removeFCart(req, res);
   });
 
 module.exports = {
