@@ -49,6 +49,7 @@ routes.patch('/product/:id', bodyParser.json(),
 routes.delete('/product/:id', (req, res)=>{
     deleteProduct(req, res)
 })
+
 routes.get("/orders", (req, res) => {
     orders.getOrders(req, res);
   });

@@ -2,7 +2,7 @@ const db = require("../config/index.js");
 
 class Orders {
   getOrders(req, res) {
-    const query = `SELECT orderID, prodName, firstName, Amount FROM orders;`; 
+    const query = `SELECT orderID, prodName, firstName, Amount FROM orders`; 
 
     db.query(query, (err, results) => {
       if (err) {
@@ -19,8 +19,8 @@ class Orders {
   getCart(req, res) {
     const query = `SELECT orders.orderID, Products.prodName, orders.Amount, users.firstName
     FROM users
-    INNER JOIN orders ON users.userID = orders.userID 
-    INNER JOIN Products ON orders.prodID = Products.prodID`; 
+    INNER JOIN orders ON users.userID = users.userID 
+    INNER JOIN Products ON Products.prodID = Products.prodID`; 
 
     db.query(query, (err, results) => {
       if (err) {
@@ -48,7 +48,8 @@ class Orders {
   }
 
   updateCart(req, res) {
-    const query = `UPDATE orders SET ? WHERE orderID = ?;`;
+    const query = `UPDATE orders SET ? WHERE orderID = ?
+    `;
 
     db.query(query, [req.body, req.params.id], (err) => {
       if (err) {
@@ -62,7 +63,7 @@ class Orders {
   }
 
   clearCart(req, res) {
-    const query = `DELETE FROM orders WHERE userID = ${req.params.id};`;
+    const query = `DELETE FROM orders WHERE userID = ${req.params.id}`;
 
     db.query(query, (err) => {
       if (err) {
@@ -76,7 +77,7 @@ class Orders {
   }
 
   deleteCart(req, res) {
-    const query = `DELETE FROM orders WHERE orderID = '${req.params.id}';`; 
+    const query = `DELETE FROM orders WHERE orderID = '${req.params.id}'`; 
 
     db.query(query, (err) => {
       if (err) {
