@@ -2,6 +2,7 @@ const db = require("../config/index.js");
 
 class orders {
   getOrders(req, res) {
+    
     const query = `SELECT orderID, prodName,firstName, Amount, quantity FROM orders;`;
 
     db.query(query, (err, results) => {
