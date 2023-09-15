@@ -71,7 +71,7 @@ routes.get("/cart", (req, res) => {
   });
   
   routes.delete("/user/:id/cart/:id", (req, res) => {
-    cart.removeFCart(req, res);
+    cart.deleteCart(req, res);
   });
 
 module.exports = {
