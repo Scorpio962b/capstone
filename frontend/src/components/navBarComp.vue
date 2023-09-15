@@ -25,7 +25,7 @@
             <router-link to="/products">products</router-link> |
           </li>
           <li class="nav-item">
-            <router-link to="/admin" >Admin</router-link> |
+            <router-link to="/admin">Admin</router-link> |
           </li>
           <li class="nav-item">
             <router-link to="/cart">Cart</router-link> |

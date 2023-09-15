@@ -11,9 +11,7 @@
 
     <div class="cont">
       <h1>We don't only find cures, we save lives</h1>
-      <div class="btn">
-        <button><a href="./about">Explore more</a></button>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
   width: 100%;
   height: 150px;
   align-items: center;
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
   color: #b8dff0;
@@ -57,19 +55,6 @@ export default {
   margin: 0;
   z-index: -1;
 }
-
-button {
-  text-decoration: none;
-  border-radius: 80px;
-  font-size: 20px;
-  height: 0px;
-  border: 2px solid black;
-  padding: 12px 68px;
-  border-radius: 75px;
-  margin-top: 20px;
-  width: 10rem;
-}
-
 .hero {
   width: 100%;
   height: 100vh;
