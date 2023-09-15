@@ -15,7 +15,7 @@ export default createStore({
     user: null,
     msg: null,
     orders: null,
-    cart: null,
+    cart: [],
     userAuth: null,
     userLoggedIn: false,
     setToken:null
@@ -42,8 +42,8 @@ export default createStore({
     setMsg: (state, msg) => {
       state.msg = msg;
     },
-    setOrders(state, orders) {
-      state.orders = orders;
+    setCarts(state, carts) {
+      state.carts = carts;
     },
     setCart(state, cart) {
       state.cart = cart;
@@ -219,4 +219,16 @@ export default createStore({
       }
     }
   },
+  getCart({commit}) {
+  try {
+    const data = JSON.parse(cookies.getProduct('cart'));
+    console.log(data);
+
+    if (data) {
+      commit('setCart', data);
+    }
+  } catch (error) {
+    console.error('Error parsing cart data:', error);
+  }
+}
 })
