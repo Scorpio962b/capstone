@@ -20,12 +20,22 @@
         <p>Sustainability: We are committed to environmentally responsible practices throughout our operations. Health Run seeks to minimize our environmental footprint and contribute to a sustainable future.</p>
 
         <h2>Contact Us</h2>
-        <p>We welcome your inquiries, feedback, and collaboration opportunities. Please don't hesitate to get in touch with us:</p>
-        <p><strong>Address:</strong> [Your Company Address]</p>
-        <p><strong>Phone:</strong> [Your Company Phone Number]</p>
-        <p><strong>Email:</strong> <a href="mailto:[Your Company Email Address]">[Your Company Email Address]</a></p>
-        <p><strong>Website:</strong> <a href="[Your Company Website]">[Your Company Website]</a></p>
-    </div>
+  <div class="formb">
+    <form class="form" action="https://formspree.io/f/xjvqvkbp" method="post">
+      <label name="Name">Name and surname:</label>
+      <input type="text"><br>
+      <label for="email">Email:</label>
+      <input type="text" name="email"><br>
+      <label for="email">Your number:</label>
+      <input type="text" name="cellphone"><br>
+      <label for="email">Message:</label>
+      <textarea name="message"></textarea>
+
+      <button type="submit" name="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
 </template>
 <script>
 export default {
@@ -36,5 +46,24 @@ export default {
     display:grid;
     justify-content: center;
     align-items: center;
+    padding-top: 8rem;
+}
+.formb{
+  padding-left:40.1% ;
+  padding-bottom: 10px;
+}
+.form{
+  --bg-color: #fff;
+  --box-color: #007BB8;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 1px; 
+  border-radius: 50px;
+  border: 2px solid var(--box-color); 
+  box-shadow: 5px 5px var(--box-color); 
+  width: 300px;
+  justify-content: center;
 }
 </style>

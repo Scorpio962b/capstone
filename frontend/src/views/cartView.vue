@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <section>
       <div>
         <h1>Checkout</h1>
@@ -126,4 +126,9 @@ export default {
 }
 };
 </script>
+<style scoped>
+.container {
+    padding-top: 8rem;
+}
+</style>
 

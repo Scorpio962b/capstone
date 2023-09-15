@@ -8,30 +8,35 @@
 <script>
 
 // import NavBarComp from '@/components/navBarComp.vue'
-import FooterComp from '@/components/footercomp.vue'
-import NavBarVue from './components/NavBar.vue'
+import FooterComp from './components/footercomp.vue'
+import NavBarVue from './components/navBarComp.vue'
 export default {
- components:  {NavBarVue, FooterComp}
+ components:  {NavBarVue, FooterComp},
 }
 
 </script>
 <style>
 
-/* #app {
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-} */
-nav a {
+  
+}
+/* nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
 nav a.router-link-exact-active {
   color: aqua;
-}
+} */
 
+nav{
+  background-color: #394871!important;
+  /* margin-bottom: 20rem; */
+}
 
 </style>

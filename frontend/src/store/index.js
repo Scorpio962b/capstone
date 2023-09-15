@@ -42,9 +42,6 @@ export default createStore({
     setMsg: (state, msg) => {
       state.msg = msg;
     },
-    setCarts(state, carts) {
-      state.carts = carts;
-    },
     setCart(state, cart) {
       state.cart = cart;
     },

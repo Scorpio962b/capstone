@@ -1,5 +1,11 @@
 <template>
+  <div class="container">
+
   <div class="proT">
+    <div>
+      <h2>add</h2>
+      <Addprod />
+    </div>
     <h2>products table</h2>
     <table v-if="Products">
       <thead>
@@ -22,13 +28,13 @@
           <td>
             <div class="buttons">
               <ProductUpdate :product="product" :prodID="product.prodID" />
-              <button @click="deleteProduct(product)">delete</button>
+              <button @click="deleteProduct(product.prodID)">delete</button>
             </div>
           </td>
           <td>
             <div class="buttons">
               <ProductUpdate :product="product" :prodID="product.prodID" />
-              <button @click="updateProduct(prodID)">edit</button>
+              <button @click="updateProduct(product.prodID)">edit</button>
             </div>
           </td>
         </tr>
@@ -72,14 +78,14 @@
           <td><img :src="user.userUrl" class= "use" alt="user.firstName" ></td>
           <td>
             <div class="buttons">
-              <UserUpdate :user="user" :userID="Users.userID" />
-              <button @click="deleteUser(user.userID)">delete</button>
+              <!-- <UserUpdate :user="user" :userID="Users.userID" /> -->
+              <button @click="deleteUser(users?.userID)">delete</button>
             </div>
           </td>
           <td>
             <div class="buttons">
-              <UserUpdate :user="user" :userID="Users.userID" />
-              <button @click="updateUser(users.userID)">edit</button>
+              <!-- <UserUpdate :user="user" :userID="Users.userID" /> -->
+              <button @click="updateUser(user.userID)">edit</button>
             </div>
           </td>
         </tr>
@@ -96,12 +102,16 @@
       <Spinner/>
     </div>
   </div>
+  </div>
 </template>
 <script>
-import Spinner from '../components/SpinnerComp.vue'
+import Spinner from '@/components/SpinnerComp.vue'
 import store from '@/store';
+import axios from 'axios';
+import Addprod from "@/components/addProduct.vue";
 export default {
   computed: {
+    props: ["product"],
       Products() {
           return this.$store.state.products;
       },
@@ -114,19 +124,45 @@ export default {
       this.$store.dispatch('getUsers');
   },
   methods: {
+      async deleteProduct(prodID) {
+      try {
+        await axios.delete(
+          `https://capstone-api-onzh.onrender.com/product/${prodID}`
+        );
+        this.$store.dispatch("getProducts");
+        alert("Product has been deleted");
+      } catch (err) {
+        alert(err);
+      }
+    },
+     async deleteUser(userID) {
+        try {
+        await axios.delete(
+          `https://capstone-api-onzh.onrender.com/user/${userID}`
+        );
+        this.$store.dispatch("getUsers");
+        alert("Users has been deleted");
+      } catch (err) {
+        alert(err);
+      }
+    }
+  },
+
+    updateProduct(prodID) {
+      this.$store.dispatch("updateProduct", prodID);
+    },
     updateUser(userID) {
       this.$store.dispatch("updateUser",userID);
     },
-    deleteUser(userID) {
-      this.$store.dispatch("deleteUser", userID);
-    },
+
+    
+    
   components: {
-      Spinner,
-      store
+    Spinner,
+      store,
+      Addprod,
   }
 }
-}
-
 </script>
 <style scoped>
 .imag{
@@ -136,5 +172,10 @@ export default {
 .use{
   width: 100%;
   height:100px!important;
+}
+</style>
+<style scoped>
+.container{
+  padding-top: 8rem;
 }
 </style>

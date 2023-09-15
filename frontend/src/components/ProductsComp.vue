@@ -24,15 +24,18 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  
 }
 .card {
   width: 22rem;
   margin-bottom: 20px;
+  background-color: #b8dff0;
+ 
 }
 .card img {
   width: 100%;

@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -10,3 +11,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 createApp(App).use(store).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
 library.add(faUser)
+
+import "bootstrap/dist/js/bootstrap.js";
+import "bootstrap"

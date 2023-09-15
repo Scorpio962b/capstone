@@ -1,10 +1,12 @@
 <template>
+    <div class="prods">
   <div v-if="Products">
       <ProCard :products="Products"/>
   </div>
   <div class="text-white loading" v-else>
         Please,give us a moment...
         <Spinner/>
+    </div>
     </div>
 </template>
 
@@ -29,5 +31,7 @@ export default {
 }
 </script>
 <style scoped>
-
+.prods {
+    padding-top: 8rem;
+}
 </style>

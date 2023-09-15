@@ -1,7 +1,4 @@
 <template>
-    
-</template>
-<!-- <template>
   <div>
     <div class="container">
       <div class="card">
@@ -30,7 +27,7 @@ const { cookies } = useCookies();
 export default {
     computed: {
         user() {
-            return this.$store.state.user || cookies.get("patient");
+            return this.$store.state.user || cookies.get("patient").result;
         },
     },
     methods: {
@@ -39,5 +36,11 @@ export default {
             router.push({ name: "login" });
         }
     }
-};
-</script> -->
+  }
+ </script>
+ <style scoped>
+ .container{
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+ } 
+ </style>

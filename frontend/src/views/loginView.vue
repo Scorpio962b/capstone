@@ -66,6 +66,9 @@ mounted() {
 //   console.log(cookies.get('setToken'));
 }
 };
-
-
 </script>
+<style scoped>
+.container {
+    padding-top: 8rem;
+}
+</style>
