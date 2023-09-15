@@ -108,7 +108,7 @@
 import Spinner from '@/components/SpinnerComp.vue'
 import store from '@/store';
 import axios from 'axios';
-import Addprod from "@/components/addProduct.vue";
+import Addprod from "@/components/addProduct.vue"
 export default {
   computed: {
     props: ["product"],
