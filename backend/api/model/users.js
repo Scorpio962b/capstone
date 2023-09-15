@@ -35,7 +35,7 @@ class Users {
   }
   login(req, res) {
     const { emailAdd, userPass } = req.body;
-    const query = `SELECT emailAdd, userPass
+    const query = `SELECT firstName,lastName,userAge,gender,userRole,emailAdd, userPass
         FROM users
         WHERE emailAdd = '${emailAdd}';`;
     db.query(query, async (err, result) => {
@@ -50,6 +50,11 @@ class Users {
           if (cErr) throw cErr;
           //create token
           const token = createToken({
+            firstName,
+            lastName,
+            gender,
+            userAge,
+            userRole,
             emailAdd,
             userPass,
           });
@@ -72,7 +77,7 @@ class Users {
   async register(req, res) {
     const data = req.body;
     // Encrypt password
-    data.userPass = await hash(data.userPass, 15);
+    data.userPass = await hash(data.userPass, 10);
     // Payload
     const user = {
       emailAdd: data.emailAdd,
