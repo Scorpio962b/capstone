@@ -50,11 +50,6 @@ class Users {
           if (cErr) throw cErr;
           //create token
           const token = createToken({
-            firstName,
-            lastName,
-            gender,
-            userAge,
-            userRole,
             emailAdd,
             userPass,
           });
@@ -77,7 +72,7 @@ class Users {
   async register(req, res) {
     const data = req.body;
     // Encrypt password
-    data.userPass = await hash(data.userPass, 10);
+    data.userPass = await hash(data.userPass, 15);
     // Payload
     const user = {
       emailAdd: data.emailAdd,
